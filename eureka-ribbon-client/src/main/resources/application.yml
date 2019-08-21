@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: eureka-ribbon-client
+
+server:
+  port: 8764
+
+eureka:
+  client:
+    serviceUrl:
+      serverZone: http://localhost：8761/eureka/     #服务注册中心的ip
