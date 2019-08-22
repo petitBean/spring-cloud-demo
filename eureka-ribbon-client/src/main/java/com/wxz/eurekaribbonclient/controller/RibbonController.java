@@ -21,9 +21,9 @@ public class RibbonController {
     return ribbonService.sayHello(name);
     }
 
-    @GetMapping(value = "/testloadBalancerClient")
+   /* @GetMapping(value = "/testloadBalancerClient")
     public String testloadBalancerClient(){
         return ribbonService.testBalanceClient();
-    }
+    }*/
 
 }

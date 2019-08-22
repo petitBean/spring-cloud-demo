@@ -9,6 +9,6 @@ public interface RibbonService {
 
      String sayHello(String name);
 
-     String testBalanceClient();
+    // String testBalanceClient();
 
 }

@@ -1,5 +1,6 @@
 package com.wxz.eurekaribbonclient.service.ServiceImpl;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.wxz.eurekaribbonclient.service.RibbonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -17,16 +18,22 @@ public class RibbonServiceImpl implements RibbonService {
     @Autowired
     private RestTemplate template;
 
-    @Autowired
-    private LoadBalancerClient balancerClient;
+    //@Autowired
+    //可以获取一些服务提供者信息
+   // private LoadBalancerClient balancerClient;
 
     @Override
+    @HystrixCommand(fallbackMethod = "fallBack")
     public String sayHello(String name){
         //路径中使用的是服务名 ，即服务提供者的 application: name
         return template.getForObject("http://eureka-client/sayHello?name="+name,String.class)+"???";
     }
 
-    @Override
+    public String fallBack(String name){
+        return "服务请求失败"+name;
+    }
+
+   /* @Override
     public String testBalanceClient(){
         ServiceInstance serviceInstance=balancerClient.choose("eureka-client");
         StringBuilder stringBuilder=new StringBuilder();
@@ -35,6 +42,9 @@ public class RibbonServiceImpl implements RibbonService {
         stringBuilder.append(" PORT:");
         stringBuilder.append(serviceInstance.getPort());
         return stringBuilder.toString();
-    }
+    }*/
+
+
+
 
 }

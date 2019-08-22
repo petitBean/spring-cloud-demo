@@ -23,6 +23,7 @@
         <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
     </properties>
 
+
     <dependencies>
         <!--Eurekaserver功能依赖-->
         <dependency>
