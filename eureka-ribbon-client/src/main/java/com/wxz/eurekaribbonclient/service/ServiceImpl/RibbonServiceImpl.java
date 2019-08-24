@@ -23,7 +23,7 @@ public class RibbonServiceImpl implements RibbonService {
    // private LoadBalancerClient balancerClient;
 
     @Override
-    @HystrixCommand(fallbackMethod = "fallBack")
+    @HystrixCommand(fallbackMethod = "fallBack")  //熔断器注释
     public String sayHello(String name){
         //路径中使用的是服务名 ，即服务提供者的 application: name
         return template.getForObject("http://eureka-client/sayHello?name="+name,String.class)+"???";

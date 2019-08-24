@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: service-zuul
+server:
+  port: 5000
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+zuul:
+  routes:     #下面目录的个数应该对应项目模块数吧
+    providerAPI:    #该词是自定义的,对应自己的某一个工程
+      #可以使以“/provapi”开头的RTL路由到eureka-client
+      path: /provapi/**           #自定义的路径
+      serviceID: eureka-client    #对应服务提供者的名称
+
+    ribbonAPI:
+      path: /ribbonapi/**
+      serviceID: eureka-ribbon-client
+    feignAPI:
+      path: /feignapi/**
+      serviceID: eureka-feign-client
+  stripPrefix: false
+
+ribbon:
+  ReadTimeout: 120000  #请求处理的超时时间
+  ConnectTimeout: 30000  #请求连接的超时时间
+
